@@ -6,10 +6,12 @@ import { PrismaService } from '../prisma/prisma.service.js';
 import { RegisterDto } from './dto/register.dto.js';
 import * as bcrypt from 'bcrypt';
 import { createHash, randomInt } from 'crypto';
+import { EmailService } from '../email/email.service.js';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(private readonly prisma: PrismaService,
+        private readonly emailService: EmailService,) { }
 
     private generateOtp(): string {
         return randomInt(100000, 1000000).toString();
